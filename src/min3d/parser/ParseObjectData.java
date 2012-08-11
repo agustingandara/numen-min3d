@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.util.Log;
-
-import min3d.Min3d;
-import min3d.Shared;
 import min3d.animation.AnimationObject3d;
 import min3d.animation.KeyFrame;
+import min3d.core.ColBoundsBox;
 import min3d.core.Object3d;
 import min3d.parser.AParser.BitmapAsset;
 import min3d.parser.AParser.Material;
@@ -59,9 +57,8 @@ public class ParseObjectData {
 	public Object3d getParsedObject(HashMap<String, Material> materialMap, TextureAtlas textureAtlas) {
 		Object3d obj = new Object3d(numFaces * 3, numFaces);
 		obj.name(name);
-		
 		parseObject(obj, materialMap, textureAtlas);
-		
+		if(obj.vertexLimits != null) Log.d("VERTEXRETURNOBJPARSED", "EXISTS");
 		return obj;
 	}
 	
@@ -77,7 +74,10 @@ public class ParseObjectData {
 					.getBitmapAssetByName(face.materialKey);
 
 			for (int j = 0; j < face.faceLength; j++) {
+				//here call all vertices
 				Number3d newVertex = vertices.get(face.v[j]);
+				if(obj.vertexLimits != null) obj.vertexLimits.addVertex(newVertex);
+				else obj.vertexLimits = new ColBoundsBox(newVertex);
 				
 				Uv newUv = face.hasuv ? texCoords.get(face.uv[j]).clone()
 						: new Uv();

@@ -3,9 +3,6 @@ package min3d.core;
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
-
-import android.util.Log;
-
 import min3d.interfaces.IObject3dContainer;
 import min3d.vos.Color4;
 import min3d.vos.Number3d;
@@ -29,7 +26,8 @@ public class Object3d
 	private boolean _ignoreFaces = false;
 	private boolean _colorMaterialEnabled = false;
 	private boolean _lightingEnabled = true;
-
+	public boolean isInternalObject = true;
+	
 	private Number3d _position = new Number3d(0,0,0);
 	private Number3d _rotation = new Number3d(0,0,0);
 	private Number3d _scale = new Number3d(1,1,1);
@@ -42,8 +40,8 @@ public class Object3d
 	private float _lineWidth = 1f;
 	private boolean _lineSmoothing = false;
 
-	
-	protected ArrayList<Object3d> _children;
+	//protected ArrayList<Object3d> _children;
+	public ColBoundsBox vertexLimits;
 	
 	protected Vertices _vertices; 
 	protected TextureList _textures;
@@ -56,7 +54,7 @@ public class Object3d
 
 	/**
 	 * Maximum number of vertices and faces must be specified at instantiation.
-	 */
+	 */	
 	public Object3d(int $maxVertices, int $maxFaces)
 	{
 		_vertices = new Vertices($maxVertices, true,true,true);
@@ -69,6 +67,7 @@ public class Object3d
 	 */
 	public Object3d(int $maxVertices, int $maxFaces, Boolean $useUvs, Boolean $useNormals, Boolean $useVertexColors)
 	{
+		//vertexLimits = new ColBoundsBox();
 		_vertices = new Vertices($maxVertices, $useUvs,$useNormals,$useVertexColors);
 		_faces = new FacesBufferedList($maxFaces);
 		_textures = new TextureList();
@@ -79,6 +78,7 @@ public class Object3d
 	 */
 	public Object3d(Vertices $vertices, FacesBufferedList $faces, TextureList $textures)
 	{
+		//vertexLimits = new ColBoundsBox();
 		_vertices = $vertices;
 		_faces = $faces;
 		_textures = $textures;
@@ -487,5 +487,9 @@ public class Object3d
 		clone.scale().z = scale().z;
 		
 		return clone;
+	}
+	
+	public void setInternalObject(boolean bool){
+		this.isInternalObject = bool;
 	}
 }

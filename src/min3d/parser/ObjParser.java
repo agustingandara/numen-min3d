@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.StringTokenizer;
-
 import min3d.Min3d;
 import min3d.Shared;
 import min3d.Utils;
@@ -127,7 +125,7 @@ public class ObjParser extends AParser implements IParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		long endTime = Calendar.getInstance().getTimeInMillis();
 		Log.d(Min3d.TAG, "End time " + (endTime - startTime));
 	}

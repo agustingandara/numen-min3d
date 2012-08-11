@@ -6,18 +6,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import min3d.Utils;
+import min3d.core.Object3d;
 import min3d.core.Object3dContainer;
 import min3d.core.RendererActivity;
 import min3d.objectPrimitives.SkyBox;
 import min3d.parser.IParser;
 import min3d.parser.Parser;
 import min3d.vos.Light;
+import min3d.vos.Number3d;
 
 public class MainActivity extends RendererActivity  {
 
 	//Skybox
 	private SkyBox skybox;
-	
 	//Object 3DS
 	private Object3dContainer object;
 	
@@ -86,12 +87,14 @@ public class MainActivity extends RendererActivity  {
 		object = parser.getParsedObject();
 		object.position().y = -1.3f;
 		object.rotation().x = -90;
+		//if(object.vertexLimits != null) Log.d("VERTEXCREATEDOBJECT", "EXISTS");
 		scene.addChild(object);
 	}
 	
 	//Update
 	public void onUpdateScene() {
 		super.onUpdateScene();
+		//if(object.vertexLimits != null) Log.d("VERTEX", "EXISTS");
 		this.onUpdateControlRotation();
 		this.onUpdateControlPosition();
 	}
@@ -139,16 +142,6 @@ public class MainActivity extends RendererActivity  {
 		this.touchposition = false;
 		this.positionpointer = -1;
 	}
-	
-//	public boolean onTouchEvent(MotionEvent event) {
-//		//Controller detection	SIMPLE-TOUCH
-//		if(this.controller == -1){
-//			if(event.getX() < getWidth()/2)	this.controller = 1;
-//			else this.controller = 2;
-//		}
-//		if(this.controller == 1)	this.onTouchEventPosition(event.getAction(), event.getX(), event.getY());
-//		if(this.controller ==2) 	this.onTouchEventRotation(event.getAction(), event.getX(), event.getY());
-//	}
 	
 	public void onTouchEventPosition(int action, float x, float y){
 		
@@ -215,6 +208,7 @@ public class MainActivity extends RendererActivity  {
 		
 		if(this.touchposition){
 			//Analogic values
+			Number3d plus = new Number3d(0, 0, 0);
 			float variationx = 0;
 			float variationy = 0;
 			float trigonometry;
@@ -236,18 +230,28 @@ public class MainActivity extends RendererActivity  {
 			}
 			//Update position up/down
 			trigonometry = variationy * (float)Math.cos(degx*Utils.DEG);
-			scene.camera().position.x += trigonometry;
-			scene.camera().target.x += trigonometry;
+			plus.x += trigonometry;
+			//scene.camera().position.x += trigonometry;
+			//scene.camera().target.x += trigonometry;
 			trigonometry = variationy * (float)Math.sin(degx*Utils.DEG);
-			scene.camera().position.z += trigonometry;
-			scene.camera().target.z += trigonometry;
+			plus.z += trigonometry;
+			//scene.camera().position.z += trigonometry;
+			//scene.camera().target.z += trigonometry;
+			
 			//Update position left/rigth
 			trigonometry = variationx * (float)Math.cos((degx*Utils.DEG)-90);
-			scene.camera().position.x += trigonometry;
-			scene.camera().target.x += trigonometry;
+			plus.x += trigonometry;
+			//scene.camera().position.x += trigonometry;
+			//scene.camera().target.x += trigonometry;
 			trigonometry = variationx * (float)Math.sin((degx*Utils.DEG)-90);
-			scene.camera().position.z += trigonometry;
-			scene.camera().target.z += trigonometry;
+			plus.z += trigonometry;
+			//scene.camera().position.z += trigonometry;
+			//scene.camera().target.z += trigonometry;
+			
+			//Plusses
+			scene.cameraPositionPlus(plus);
+			//scene.camera().positionPlus(plus);
+			//scene.camera().targetPlus(plus);
 		}
 	}
 }
