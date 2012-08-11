@@ -41,7 +41,7 @@ public class Object3d
 	private boolean _lineSmoothing = false;
 
 	//protected ArrayList<Object3d> _children;
-	public ColBoundsBox vertexLimits;
+	public BoundingBox vertexLimits;
 	
 	protected Vertices _vertices; 
 	protected TextureList _textures;
