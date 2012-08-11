@@ -69,13 +69,12 @@ public class Scene implements IObject3dContainer, IDirtyParent
 	 * Camera movement position/rotation
 	 */
 	public void cameraPositionPlus(Number3d plus){
-		camera().positionPlus(plus);
-		camera().targetPlus(plus);
+		_camera.cameraPositionPlus(plus);//positionPlus(plus);
+		//_camera.targetPlus(plus);
 	}
 	
-	public void cameraRotationPlus(Number3d plusPosition, Number3d plusTarget){
-		camera().positionPlus(plusPosition);
-		camera().targetPlus(plusTarget);
+	public void cameraRotationPlus( Number3d plusTarget){
+		_camera.cameraRotationPlus(plusTarget);
 	}
 	
 	/**

@@ -285,6 +285,7 @@ public class Renderer implements GLSurfaceView.Renderer
 			_gl.glDisable(GL10.GL_FOG);
 		}
 
+		//movement dinamic
 		for (int i = 0; i < _scene.children().size(); i++)
 		{
 			Object3d o = _scene.children().get(i);

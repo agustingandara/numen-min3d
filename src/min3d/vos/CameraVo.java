@@ -27,4 +27,10 @@ public class CameraVo
 		target.z += targetPlus.z;
 		target.y += targetPlus.y;
 	}
+	
+	public void targetIqual(Number3d targetPlus){
+		target.x = targetPlus.x;
+		target.z = targetPlus.z;
+		target.y = targetPlus.y;
+	}
 }

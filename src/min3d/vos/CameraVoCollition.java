@@ -15,8 +15,7 @@ public class CameraVoCollition extends CameraVo
 		this.children = children;
 	}
 	
-	@Override
-	public void positionPlus(Number3d positionPlus) {
+	public void cameraPositionPlus(Number3d positionPlus) {
 		
 		//New camera movement
 		Number3d positionNew = new Number3d(0,0,0);
@@ -35,13 +34,13 @@ public class CameraVoCollition extends CameraVo
 				//Log.d("VERTEX", "INTERNAL");
 				if(obj instanceof Object3dContainer){
 					for (Object3d subObj : ((Object3dContainer) obj).children){
-						if(this.existsCollition(subObj, positionNew, targetNew)){
+						if(subObj.vertexLimits.existsCollition(subObj, positionNew, targetNew)){
 							colision = true;
 							break;
 						}
 					}
 				}else if(obj instanceof Object3d){
-					if(this.existsCollition(obj, positionNew, targetNew)) {
+					if(obj.vertexLimits.existsCollition(obj, positionNew, targetNew)) {
 						colision = true;
 						break;
 					}
@@ -49,15 +48,53 @@ public class CameraVoCollition extends CameraVo
 			}
 		}
 		
-		if(!colision) super.positionPlus(positionPlus);
+		if(!colision) {
+			super.positionPlus(positionPlus);
+			super.targetPlus(positionPlus);
+		}
 	}
 	
+	public void cameraRotationPlus(Number3d plusTarget){
+
+		//New camera movement
+		/*Number3d positionNew = new Number3d(0,0,0);
+		positionNew.x = position.x + plusPosition.x;
+		positionNew.y = position.y + plusPosition.y;
+		positionNew.z = position.z + plusPosition.z;*/
+		Number3d targetNew = new Number3d(0,0,0);
+		targetNew.x = position.y + plusTarget.x;
+		targetNew.y = position.y + plusTarget.y;
+		targetNew.z = position.z + plusTarget.z;
+		
+		boolean colision = false;
+		
+		for (Object3d obj : children){
+			if(obj.isInternalObject){
+				//Log.d("VERTEX", "INTERNAL");
+				if(obj instanceof Object3dContainer){
+					for (Object3d subObj : ((Object3dContainer) obj).children){
+						if(subObj.vertexLimits.existsCollition(subObj, targetNew)){
+							colision = true;
+							break;
+						}
+					}
+				}else if(obj instanceof Object3d){
+					if(obj.vertexLimits.existsCollition(obj, targetNew)) {
+						colision = true;
+						break;
+					}
+				}
+			}
+		}
+		
+		if(!colision) super.targetIqual(targetNew);
+	}	
+	
+	/*
 	private boolean existsCollition(Object3d obj, Number3d positionNew, Number3d targetNew){
 		if(obj.vertexLimits != null)
-		//Log.d("VERTEX", "EXISTS");
-		//obj.vertexLimits.logAllPoints();
 			if(obj.vertexLimits.existsCollition(obj, positionNew, targetNew)) return true;
 				
 		return false;
-	}
+	}*/
 }
