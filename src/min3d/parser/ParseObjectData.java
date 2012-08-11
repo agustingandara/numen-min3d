@@ -58,7 +58,7 @@ public class ParseObjectData {
 		Object3d obj = new Object3d(numFaces * 3, numFaces);
 		obj.name(name);
 		parseObject(obj, materialMap, textureAtlas);
-		obj.vertexLimits.createBox();
+		//obj.vertexLimits.createBox();
 		//if(obj.vertexLimits != null) Log.d("VERTEXRETURNOBJPARSED", "EXISTS");
 		return obj;
 	}

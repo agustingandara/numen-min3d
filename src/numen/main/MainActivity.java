@@ -45,7 +45,7 @@ public class MainActivity extends RendererActivity  {
 	private final float degsens = 1.2f;
 	private final float movsens = 0.12f;
 	private final float spercent = 0.40f;
-	private final int degylimit = 30;
+	private final int degylimit = 25;
 	private final float areapropheigth = 0.4f;
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,9 @@ public class MainActivity extends RendererActivity  {
 
 		object = parser.getParsedObject();
 		object.position().y = -1.3f;
-		object.rotation().x = -90;
+		//object.position().z = -1f;
+		//object.position().x = 1f;
+		//object.rotation().x = -90;
 		//if(object.vertexLimits != null) Log.d("VERTEXCREATEDOBJECT", "EXISTS");
 		scene.addChild(object);
 	}
@@ -182,6 +184,8 @@ public class MainActivity extends RendererActivity  {
 	public void onUpdateControlRotation(){
 		
 		if(this.touchrotation){
+			//Analogic values
+			Number3d plus = new Number3d(0, 0, 0);
 			//Analogic update X values
 			if(this.dx < area*spercent){ 
 				if(this.dx < 0) this.dx = 0;
@@ -198,9 +202,15 @@ public class MainActivity extends RendererActivity  {
 				if(this.dy > area) this.dy = area;
 				this.degy -= (degsens/(area*spercent))*(this.dy-(area*(1-spercent)));
 			}
+			
+			plus.x = (float)Math.cos(degx*Utils.DEG);
+			plus.z = (float)Math.sin(degx*Utils.DEG);
+			plus.y = (float)Math.sin(degy*Utils.DEG);
 			scene.camera().target.x = scene.camera().position.x + (float)Math.cos(degx*Utils.DEG);
 			scene.camera().target.z = scene.camera().position.z + (float)Math.sin(degx*Utils.DEG);
 			scene.camera().target.y = scene.camera().position.y + (float)Math.sin(degy*Utils.DEG);
+			//Plusses
+			//scene.cameraRotationPlus(plus);
 		}
 	}
 	

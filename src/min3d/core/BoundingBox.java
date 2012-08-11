@@ -6,6 +6,7 @@ import min3d.vos.Number3d;
 public class BoundingBox{
 
 	//8 vertex
+	/*
 	protected Number3d mmm;
 	protected Number3d mmM;
 	protected Number3d mMm;
@@ -14,7 +15,7 @@ public class BoundingBox{
 	protected Number3d MmM;
 	protected Number3d MMm;
 	protected Number3d MMM;
-	
+	*/
 	private Number3d Max;
 	private Number3d Min;
 	
@@ -25,6 +26,21 @@ public class BoundingBox{
 	
 	public boolean existsCollition(Object3d obj, Number3d positionNew, Number3d targetNew){
 		logAllPoints(obj, positionNew);
+
+		if(Min.x < positionNew.x && positionNew.x < Max.x && 
+			Min.z < positionNew.z && positionNew.z < Max.z) return true;
+	
+		if(Min.x < targetNew.x && targetNew.x < Max.x && 
+				Min.z < targetNew.z && targetNew.z < Max.z) return true;
+		
+		return false;
+	}
+	
+	public boolean existsCollition(Object3d obj, Number3d targetNew){
+	
+		if(Min.x < targetNew.x && targetNew.x < Max.x && 
+				Min.z < targetNew.z && targetNew.z < Max.z) return true;
+		
 		return false;
 	}
 	
@@ -42,23 +58,17 @@ public class BoundingBox{
 		Log.d("CAMY", String.valueOf(positionNew.y));
 		Log.d("CAMZ", String.valueOf(positionNew.z));
 	}
-	
+		
 	public void addVertex(Number3d number){
 		//Log.d("VERTEXADD", ".");
-		if(number.x < Min.x)
-			Min.x = number.x;
-		else if(number.x > Max.x)
-			Max.x = number.x;
-		if(number.y < Min.y)
-			Min.y = number.y;
-		else if(number.y > Max.y)
-			Max.y = number.y;
-		if(number.z < Min.z)
-			Min.z = number.z;
-		else if(number.z > Max.z)
-			Max.z = number.z;
+		if(number.x < Min.x) Min.x = number.x;
+		else if(number.x > Max.x) Max.x = number.x;
+		if(number.y < Min.y) Min.y = number.y;
+		else if(number.y > Max.y) Max.y = number.y;
+		if(number.z < Min.z) Min.z = number.z;
+		else if(number.z > Max.z) Max.z = number.z;
 	}
-	
+	/*
 	public void createBox(){
 		this.mmm = new Number3d(Min.x, Min.y, Min.z);
 		this.mmM = new Number3d(Min.x, Min.y, Max.z);
@@ -68,5 +78,5 @@ public class BoundingBox{
 		this.MmM = new Number3d(Max.x, Min.y, Max.z);
 		this.MMm = new Number3d(Max.x, Max.y, Min.z);
 		this.MMM = new Number3d(Max.x, Max.y, Max.z);
-	}
+	}*/
 }
