@@ -56,7 +56,7 @@ public class CameraVoCollition extends CameraVo
 		if(obj.vertexLimits != null)
 		//Log.d("VERTEX", "EXISTS");
 		//obj.vertexLimits.logAllPoints();
-			if(obj.vertexLimits.existsCollition(positionNew, targetNew)) return true;
+			if(obj.vertexLimits.existsCollition(obj, positionNew, targetNew)) return true;
 				
 		return false;
 	}
