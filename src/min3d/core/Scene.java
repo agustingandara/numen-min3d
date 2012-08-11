@@ -9,9 +9,11 @@ import min3d.interfaces.IDirtyParent;
 import min3d.interfaces.IObject3dContainer;
 import min3d.interfaces.ISceneController;
 import min3d.vos.CameraVo;
+import min3d.vos.CameraVoCollition;
 import min3d.vos.Color4;
 import min3d.vos.Color4Managed;
 import min3d.vos.FogType;
+import min3d.vos.Number3d;
 import android.util.Log;
 
 
@@ -20,7 +22,7 @@ public class Scene implements IObject3dContainer, IDirtyParent
 	private ArrayList<Object3d> _children = new ArrayList<Object3d>();
 
 	private ManagedLightList _lights;
-	private CameraVo _camera;
+	private CameraVoCollition _camera;
 	
 	private Color4Managed _backgroundColor;
 	private boolean _lightingEnabled;
@@ -45,6 +47,10 @@ public class Scene implements IObject3dContainer, IDirtyParent
 		_fogEnabled = false;
 	}
 
+	public ArrayList<Object3d> getAllObjects(){
+		return _children;
+	}
+	
 	/**
 	 * Allows you to use any Class implementing ISceneController
 	 * to drive the Scene...
@@ -59,7 +65,18 @@ public class Scene implements IObject3dContainer, IDirtyParent
 		_sceneController = $sceneController;
 	}
 	
-	//
+	/**
+	 * Camera movement position/rotation
+	 */
+	public void cameraPositionPlus(Number3d plus){
+		camera().positionPlus(plus);
+		camera().targetPlus(plus);
+	}
+	
+	public void cameraRotationPlus(Number3d plusPosition, Number3d plusTarget){
+		camera().positionPlus(plusPosition);
+		camera().targetPlus(plusTarget);
+	}
 	
 	/**
 	 * Resets Scene to default settings.
@@ -72,7 +89,7 @@ public class Scene implements IObject3dContainer, IDirtyParent
 
 		_children = new ArrayList<Object3d>();
 
-		_camera = new CameraVo();
+		_camera = new CameraVoCollition(_children);
 		
 		_backgroundColor = new Color4Managed(0,0,0,255, this);
 		
@@ -160,7 +177,7 @@ public class Scene implements IObject3dContainer, IDirtyParent
 	}
 	public void camera(CameraVo $camera)
 	{
-		_camera = $camera;
+		_camera = (CameraVoCollition) $camera;
 	}
 	
 	/**

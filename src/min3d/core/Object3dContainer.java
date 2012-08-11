@@ -6,7 +6,7 @@ import min3d.interfaces.IObject3dContainer;
 
 public class Object3dContainer extends Object3d implements IObject3dContainer
 {
-	protected ArrayList<Object3d> _children = new ArrayList<Object3d>();
+	public ArrayList<Object3d> children = new ArrayList<Object3d>();
 
 	public Object3dContainer()
 	{
@@ -38,7 +38,7 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 	
 	public void addChild(Object3d $o)
 	{
-		_children.add($o);
+		children.add($o);
 		
 		$o.parent(this);
 		$o.scene(this.scene());
@@ -46,7 +46,7 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 	
 	public void addChildAt(Object3d $o, int $index) 
 	{
-		_children.add($index, $o);
+		children.add($index, $o);
 		
 		$o.parent(this);
 		$o.scene(this.scene());
@@ -54,7 +54,7 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 
 	public boolean removeChild(Object3d $o)
 	{
-		boolean b = _children.remove($o);
+		boolean b = children.remove($o);
 		
 		if (b) {
 			$o.parent(null);
@@ -65,7 +65,7 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 	
 	public Object3d removeChildAt(int $index) 
 	{
-		Object3d o = _children.remove($index);
+		Object3d o = children.remove($index);
 		if (o != null) {
 			o.parent(null);
 			o.scene(null);
@@ -75,7 +75,7 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 	
 	public Object3d getChildAt(int $index) 
 	{
-		return _children.get($index);
+		return children.get($index);
 	}
 
 	/**
@@ -83,28 +83,28 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 	 */
 	public Object3d getChildByName(String $name)
 	{
-		for (int i = 0; i < _children.size(); i++)
+		for (int i = 0; i < children.size(); i++)
 		{
-			if (_children.get(i).name().equals($name)) return _children.get(i); 
+			if (children.get(i).name().equals($name)) return children.get(i); 
 		}
 		return null;
 	}
 
 	public int getChildIndexOf(Object3d $o) 
 	{
-		return _children.indexOf($o);		
+		return children.indexOf($o);		
 	}
 
 
 	public int numChildren() 
 	{
-		return _children.size();
+		return children.size();
 	}
 	
 	/*package-private*/ 
 	ArrayList<Object3d> children()
 	{
-		return _children;
+		return children;
 	}
 	
 	public Object3dContainer clone()

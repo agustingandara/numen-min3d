@@ -25,6 +25,7 @@ public class SkyBox extends Object3dContainer {
 	
 	public SkyBox(float size, int quality) {
 		super(0, 0);
+		this.isInternalObject = false;
 		this.size = size;
 		this.halfSize = size *.5f;
 		this.quality = quality;
