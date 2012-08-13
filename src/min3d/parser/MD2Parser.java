@@ -4,8 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-
 import min3d.Min3d;
 import min3d.Shared;
 import min3d.animation.AnimationObject3d;
@@ -118,7 +116,7 @@ public class MD2Parser extends AParser implements IParser {
 		ByteArrayInputStream ba = new ByteArrayInputStream(bytes,
 				header.offsetFrames - 68, bytes.length - header.offsetFrames);
 		LittleEndianDataInputStream is = new LittleEndianDataInputStream(ba);
-		ArrayList<Number3d> firstFrameVerts = new ArrayList<Number3d>();
+		//ArrayList<Number3d> firstFrameVerts = new ArrayList<Number3d>();
 
 		for (int i = 0; i < header.numFrames; i++) {
 			float scaleX = is.readFloat();
@@ -143,7 +141,7 @@ public class MD2Parser extends AParser implements IParser {
 				vertices[index++] = scaleY * is.readUnsignedByte() + translateY;
 				vertices[index++] = scaleZ * is.readUnsignedByte() + translateZ;
 				
-				int normalIndex = is.readUnsignedByte();
+				//int normalIndex = is.readUnsignedByte();
 				if (i == 0)
 					co.vertices.add(new Number3d(vertices[index - 3],
 							vertices[index - 2], vertices[index - 1]));
@@ -196,18 +194,18 @@ public class MD2Parser extends AParser implements IParser {
 		public int version;
 		public int skinWidth;
 		public int skinHeight;
-		public int frameSize;
+		//public int frameSize;
 		public int numSkins;
 		public int numVerts;
 		public int numTexCoord;
 		public int numTriangles;
-		public int numGLCommands;
+		//public int numGLCommands;
 		public int numFrames;
 		public int offsetSkins;
 		public int offsetTexCoord;
 		public int offsetTriangles;
 		public int offsetFrames;
-		public int offsetGLCommands;
+		//public int offsetGLCommands;
 		public int offsetEnd;
 
 		public void parse(InputStream stream) throws Exception {
@@ -219,20 +217,20 @@ public class MD2Parser extends AParser implements IParser {
 
 			skinWidth = readInt(stream);
 			skinHeight = readInt(stream);
-			frameSize = readInt(stream);
+			//frameSize = readInt(stream);
 
 			numSkins = readInt(stream);
 			numVerts = readInt(stream);
 			numTexCoord = readInt(stream);
 			numTriangles = readInt(stream);
-			numGLCommands = readInt(stream);
+			//numGLCommands = readInt(stream);
 			numFrames = readInt(stream);
 
 			offsetSkins = readInt(stream);
 			offsetTexCoord = readInt(stream);
 			offsetTriangles = readInt(stream);
 			offsetFrames = readInt(stream);
-			offsetGLCommands = readInt(stream);
+			//offsetGLCommands = readInt(stream);
 			offsetEnd = readInt(stream);
 		}
 	}

@@ -154,7 +154,7 @@ public class TextureManager
 		return s;
 	}
 	
-	private void logContents()
+	public void logContents()
 	{
 		Log.v(Min3d.TAG, "TextureManager contents updated - " + arrayToString( getTextureIds() ) );		
 	}
