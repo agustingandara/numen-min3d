@@ -27,28 +27,7 @@ public class CameraVoCollition extends CameraVo
 		targetNew.y = target.y + positionPlus.y;
 		targetNew.z = target.z + positionPlus.z;
 		
-		boolean colision = false;
-		
-		for (Object3d obj : children){
-			if(obj.isInternalObject){
-				//Log.d("VERTEX", "INTERNAL");
-				if(obj instanceof Object3dContainer){
-					for (Object3d subObj : ((Object3dContainer) obj).children){
-						if(subObj.vertexLimits.existsCollition(subObj, positionNew, targetNew)){
-							colision = true;
-							break;
-						}
-					}
-				}else if(obj instanceof Object3d){
-					if(obj.vertexLimits.existsCollition(obj, positionNew, targetNew)) {
-						colision = true;
-						break;
-					}
-				}
-			}
-		}
-		
-		if(!colision) {
+		if(!existsCollition(positionNew, targetNew)) {
 			super.positionPlus(positionPlus);
 			super.targetPlus(positionPlus);
 		}
@@ -62,9 +41,14 @@ public class CameraVoCollition extends CameraVo
 		positionNew.y = position.y + plusPosition.y;
 		positionNew.z = position.z + plusPosition.z;*/
 		Number3d targetNew = new Number3d(0,0,0);
-		targetNew.x = position.y + plusTarget.x;
+		targetNew.x = position.x + plusTarget.x;
 		targetNew.y = position.y + plusTarget.y;
 		targetNew.z = position.z + plusTarget.z;
+				
+		if(!existsCollition(null, targetNew)) super.targetIqual(targetNew);
+	}	
+	
+	private boolean existsCollition(Number3d positionNew, Number3d targetNew){
 		
 		boolean colision = false;
 		
@@ -73,22 +57,21 @@ public class CameraVoCollition extends CameraVo
 				//Log.d("VERTEX", "INTERNAL");
 				if(obj instanceof Object3dContainer){
 					for (Object3d subObj : ((Object3dContainer) obj).children){
-						if(subObj.vertexLimits.existsCollition(subObj, targetNew)){
+						if(subObj.boundingBox.existsCollition(subObj, positionNew, targetNew)){
 							colision = true;
 							break;
 						}
 					}
 				}else if(obj instanceof Object3d){
-					if(obj.vertexLimits.existsCollition(obj, targetNew)) {
+					if(obj.boundingBox.existsCollition(obj, positionNew, targetNew)) {
 						colision = true;
 						break;
 					}
 				}
 			}
 		}
-		
-		if(!colision) super.targetIqual(targetNew);
-	}	
+		return colision;
+	}
 	
 	/*
 	private boolean existsCollition(Object3d obj, Number3d positionNew, Number3d targetNew){

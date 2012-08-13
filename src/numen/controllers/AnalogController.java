@@ -1,6 +1,6 @@
 package numen.controllers;
 
-import min3d.Utils;
+import numen.algorithms.PositionRectAlgorithms;
 import min3d.core.Scene;
 import min3d.vos.Number3d;
 import android.view.MotionEvent;
@@ -150,14 +150,14 @@ public class AnalogController {
 				this.degy -= (degsens/(area*spercent))*(this.dy-(area*(1-spercent)));
 			}
 			
-			plus.x = (float)Math.cos(degx*Utils.DEG);
-			plus.z = (float)Math.sin(degx*Utils.DEG);
-			plus.y = (float)Math.sin(degy*Utils.DEG);
-			scene.camera().target.x = scene.camera().position.x + (float)Math.cos(degx*Utils.DEG);
-			scene.camera().target.z = scene.camera().position.z + (float)Math.sin(degx*Utils.DEG);
-			scene.camera().target.y = scene.camera().position.y + (float)Math.sin(degy*Utils.DEG);
+			plus.x = PositionRectAlgorithms.rotationXAngle(degx);//(float)Math.cos(degx*Utils.DEG);
+			plus.z = PositionRectAlgorithms.rotationZAngle(degx);//(float)Math.sin(degx*Utils.DEG);
+			plus.y = PositionRectAlgorithms.rotationYAngle(degy);//(float)Math.sin(degy*Utils.DEG);
+			//scene.camera().target.x = scene.camera().position.x + (float)Math.cos(degx*Utils.DEG);
+			//scene.camera().target.z = scene.camera().position.z + (float)Math.sin(degx*Utils.DEG);
+			//scene.camera().target.y = scene.camera().position.y + (float)Math.sin(degy*Utils.DEG);
 			//Plusses
-			//scene.cameraRotationPlus(plus);
+			scene.cameraRotationPlus(plus);
 		}
 	}
 	
@@ -168,7 +168,7 @@ public class AnalogController {
 			Number3d plus = new Number3d(0, 0, 0);
 			float variationx = 0;
 			float variationy = 0;
-			float trigonometry;
+			//float trigonometry;
 			//Analogic update X values
 			if(this.dxSecondary < area*spercent){ 
 				if(this.dxSecondary < 0) this.dxSecondary = 0;
@@ -186,22 +186,22 @@ public class AnalogController {
 				variationy = -(movsens/(area*spercent))*(this.dySecondary-(area*(1-spercent)));
 			}
 			//Update position up/down
-			trigonometry = variationy * (float)Math.cos(degx*Utils.DEG);
-			plus.x += trigonometry;
+			//trigonometry = variationy * (float)Math.cos(degx*Utils.DEG);
+			plus.x += PositionRectAlgorithms.positionXFowardBack(variationy, degx);//trigonometry;
 			//scene.camera().position.x += trigonometry;
 			//scene.camera().target.x += trigonometry;
-			trigonometry = variationy * (float)Math.sin(degx*Utils.DEG);
-			plus.z += trigonometry;
+			//trigonometry = variationy * (float)Math.sin(degx*Utils.DEG);
+			plus.z += PositionRectAlgorithms.positionZFowardBack(variationy, degx);//trigonometry;
 			//scene.camera().position.z += trigonometry;
 			//scene.camera().target.z += trigonometry;
 			
 			//Update position left/rigth
-			trigonometry = variationx * (float)Math.cos((degx*Utils.DEG)-90);
-			plus.x += trigonometry;
+			//trigonometry = variationx * (float)Math.cos((degx*Utils.DEG)-90);
+			plus.x += PositionRectAlgorithms.positionXLeftRight(variationx, degx);//trigonometry;
 			//scene.camera().position.x += trigonometry;
 			//scene.camera().target.x += trigonometry;
-			trigonometry = variationx * (float)Math.sin((degx*Utils.DEG)-90);
-			plus.z += trigonometry;
+			//trigonometry = variationx * (float)Math.sin((degx*Utils.DEG)-90);
+			plus.z += PositionRectAlgorithms.positionZLeftRight(variationx, degx);//trigonometry;
 			//scene.camera().position.z += trigonometry;
 			//scene.camera().target.z += trigonometry;
 			

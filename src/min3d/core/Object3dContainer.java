@@ -3,6 +3,7 @@ package min3d.core;
 import java.util.ArrayList;
 
 import min3d.interfaces.IObject3dContainer;
+import min3d.vos.Number3d;
 
 public class Object3dContainer extends Object3d implements IObject3dContainer
 {
@@ -77,7 +78,81 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 	{
 		return children.get($index);
 	}
-
+	
+	/**
+	 * X/Y/Z position of object. 
+	 */
+	
+	public void positionPlus(float x, float y, float z){
+		
+		_position.x += x;
+		_position.y += y;
+		_position.z += z;
+		//Dinamic collitions - Plus funciton into object Container
+		for(int i = 0; i< this.numChildren();i++){
+			this.getChildAt(i).boundingBox.positionPlus(x, y, z);
+		}
+	}
+	
+	public void positionPlus(Number3d plus){
+		
+		_position.x += plus.x;
+		_position.y += plus.y;
+		_position.z += plus.z;
+		//Dinamic collitions - Plus funciton into object Container
+		for(int i = 0; i< this.numChildren();i++){
+			this.getChildAt(i).boundingBox.positionPlus(plus.x, plus.y, plus.z);
+		}
+	}
+	
+	/**
+	 * X/Y/Z euler rotation of object, using Euler angles.
+	 * Units should be in degrees, to match OpenGL usage. 
+	 */
+	public void rotationPlus(float x, float y, float z){
+		_rotation.x += x;
+		_rotation.y += y;
+		_rotation.z += z;
+		//Dinamic collitions - Plus funciton into object Container
+		for(int i = 0; i< this.numChildren();i++){
+			this.getChildAt(i).boundingBox.rotationPlus(x, y, z);
+		}
+	}
+	
+	public void rotationPlus(Number3d plus){
+		_rotation.x += plus.x;
+		_rotation.y += plus.y;
+		_rotation.z += plus.z;
+		//Dinamic collitions - Plus funciton into object Container
+		for(int i = 0; i< this.numChildren();i++){
+			this.getChildAt(i).boundingBox.rotationPlus(plus.x, plus.y, plus.z);
+		}
+	}
+	
+	/**
+	 * X/Y/Z scale of object.
+	 */
+	
+	public void scalePlus(float x, float y, float z){
+		_scale.x += x;
+		_scale.y += y;
+		_scale.z += z;
+		//Dinamic collitions - Plus funciton into object Container
+		for(int i = 0; i< this.numChildren();i++){
+			this.getChildAt(i).boundingBox.scalePlus(x, y, z);
+		}
+	}
+	
+	public void scalePlus(Number3d plus){
+		_scale.x += plus.x;
+		_scale.y += plus.y;
+		_scale.z += plus.z;
+		//Dinamic collitions - Plus funciton into object Container
+		for(int i = 0; i< this.numChildren();i++){
+			this.getChildAt(i).boundingBox.scalePlus(plus.x, plus.y, plus.z);
+		}
+	}
+	
 	/**
 	 * TODO: Use better lookup 
 	 */

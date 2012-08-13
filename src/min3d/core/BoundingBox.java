@@ -25,23 +25,55 @@ public class BoundingBox{
 	}
 	
 	public boolean existsCollition(Object3d obj, Number3d positionNew, Number3d targetNew){
-		logAllPoints(obj, positionNew);
+		//logAllPoints(obj, positionNew);
 
-		if(Min.x < positionNew.x && positionNew.x < Max.x && 
-			Min.z < positionNew.z && positionNew.z < Max.z) return true;
-	
-		if(Min.x < targetNew.x && targetNew.x < Max.x && 
-				Min.z < targetNew.z && targetNew.z < Max.z) return true;
+		if(positionNew != null)
+			if(Min.x < positionNew.x && positionNew.x < Max.x && 
+				Min.z < positionNew.z && positionNew.z < Max.z) return true;
+
+		if(targetNew != null)
+			if(Min.x < targetNew.x && targetNew.x < Max.x && 
+					Min.z < targetNew.z && targetNew.z < Max.z) return true;
 		
 		return false;
 	}
 	
-	public boolean existsCollition(Object3d obj, Number3d targetNew){
+	/*public boolean existsCollition(Object3d obj, Number3d targetNew){
 	
 		if(Min.x < targetNew.x && targetNew.x < Max.x && 
 				Min.z < targetNew.z && targetNew.z < Max.z) return true;
 		
 		return false;
+	}*/
+	
+	public void positionPlus(float x, float y, float z){
+		
+		Min.x += x;
+		Max.x += x;
+		Min.y += y;
+		Max.y += y;
+		Min.z += z;
+		Max.z += z;
+	}
+	
+	public void rotationPlus(float x, float y, float z){
+		
+		Min.x += x;
+		Max.x += x;
+		Min.y += y;
+		Max.y += y;
+		Min.z += z;
+		Max.z += z;
+	}
+	
+	public void scalePlus(float x, float y, float z){
+		
+		/*Min.x += x;
+		Max.x += x;
+		Min.y += y;
+		Max.y += y;
+		Min.z += z;
+		Max.z += z;*/
 	}
 	
 	public void logAllPoints(Object3d obj, Number3d positionNew){
