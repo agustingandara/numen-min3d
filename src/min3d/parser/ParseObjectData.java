@@ -2,8 +2,6 @@ package min3d.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import android.util.Log;
 import min3d.animation.AnimationObject3d;
 import min3d.animation.KeyFrame;
 import min3d.core.BoundingBox;

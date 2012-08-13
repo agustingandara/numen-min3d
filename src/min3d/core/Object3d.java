@@ -1,7 +1,5 @@
 package min3d.core;
 
-import java.util.ArrayList;
-
 import javax.microedition.khronos.opengles.GL10;
 import min3d.interfaces.IObject3dContainer;
 import min3d.vos.Color4;

@@ -1,14 +1,11 @@
 package min3d.parser;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-
 import min3d.Min3d;
 import min3d.Shared;
 import min3d.Utils;
