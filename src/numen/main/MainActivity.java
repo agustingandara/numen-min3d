@@ -57,7 +57,8 @@ public class MainActivity extends RendererActivity  {
 
 		//Objects
 		this.object = parser.getParsedObject();
-		this.object.position().y = -1.3f;
+		this.object.positionPlus(-1f, -1.3f, 0);	// .y = -1.3f; .x = -1f;
+		//this.object.rotationPlus(-90, 0, 0);
 		this.scene.addChild(object);
 	}
 	

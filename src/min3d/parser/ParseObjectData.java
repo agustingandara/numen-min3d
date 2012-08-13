@@ -75,8 +75,8 @@ public class ParseObjectData {
 			for (int j = 0; j < face.faceLength; j++) {
 				//here call all vertices
 				Number3d newVertex = vertices.get(face.v[j]);
-				if(obj.vertexLimits != null) obj.vertexLimits.addVertex(newVertex);
-				else obj.vertexLimits = new BoundingBox(newVertex);
+				if(obj.boundingBox != null) obj.boundingBox.addVertex(newVertex);
+				else obj.boundingBox = new BoundingBox(newVertex);
 				
 				Uv newUv = face.hasuv ? texCoords.get(face.uv[j]).clone()
 						: new Uv();

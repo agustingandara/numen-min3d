@@ -26,9 +26,9 @@ public class Object3d
 	private boolean _lightingEnabled = true;
 	public boolean isInternalObject = true;
 	
-	private Number3d _position = new Number3d(0,0,0);
-	private Number3d _rotation = new Number3d(0,0,0);
-	private Number3d _scale = new Number3d(1,1,1);
+	protected Number3d _position = new Number3d(0,0,0);
+	protected Number3d _rotation = new Number3d(0,0,0);
+	protected Number3d _scale = new Number3d(1,1,1);
 
 	private Color4 _defaultColor = new Color4();
 	
@@ -39,7 +39,7 @@ public class Object3d
 	private boolean _lineSmoothing = false;
 
 	//protected ArrayList<Object3d> _children;
-	public BoundingBox vertexLimits;
+	public BoundingBox boundingBox;
 	
 	protected Vertices _vertices; 
 	protected TextureList _textures;
@@ -336,26 +336,66 @@ public class Object3d
 	/**
 	 * X/Y/Z position of object. 
 	 */
-	public Number3d position()
-	{
+	public Number3d position() {
 		return _position;
+	}
+	
+	public void positionPlus(Number3d plus){
+		_position.x += plus.x;
+		_position.y += plus.y;
+		_position.z += plus.z;
+		if(boundingBox != null) boundingBox.positionPlus(plus.x, plus.y, plus.z);
+	}
+	
+	public void positionPlus(float x, float y, float z){
+		
+		_position.x += x;
+		_position.y += y;
+		_position.z += z;
+		if(boundingBox != null) boundingBox.positionPlus(x, y, z);
 	}
 	
 	/**
 	 * X/Y/Z euler rotation of object, using Euler angles.
 	 * Units should be in degrees, to match OpenGL usage. 
 	 */
-	public Number3d rotation()
-	{
+	public Number3d rotation(){
 		return _rotation;
+	}
+	
+	public void rotationPlus(Number3d plus){
+		_rotation.x += plus.x;
+		_rotation.y += plus.y;
+		_rotation.z += plus.z;
+		if(boundingBox != null) boundingBox.rotationPlus(plus.x, plus.y, plus.z);
+	}
+	
+	public void rotationPlus(float x, float y, float z){
+		_rotation.x += x;
+		_rotation.y += y;
+		_rotation.z += z;
+		if(boundingBox != null) boundingBox.rotationPlus(x, y, z);
 	}
 
 	/**
 	 * X/Y/Z scale of object.
 	 */
-	public Number3d scale()
-	{
+	public Number3d scale(){
 		return _scale;
+	}
+	
+	public void scalePlus(Number3d plus){
+		_scale.x += plus.x;
+		_scale.y += plus.y;
+		_scale.z += plus.z;
+		if(boundingBox != null) boundingBox.scalePlus(plus.x, plus.y, plus.z);
+	}
+	
+	public void scalePlus(float x, float y, float z){
+		_scale.x += x;
+		_scale.y += y;
+		_scale.z += z;
+		if(boundingBox != null) boundingBox.scalePlus(x, y, z);
 	}
 	
 	/**
