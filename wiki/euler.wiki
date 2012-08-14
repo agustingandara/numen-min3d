@@ -1,0 +1,2 @@
+#labels Teorema,Rotacion,Euler
+http://es.wikipedia.org/wiki/Teorema_de_rotaci%C3%B3n_de_Euler
