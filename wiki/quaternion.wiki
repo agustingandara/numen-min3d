@@ -1,3 +1,4 @@
+#labels quaternion,axis,angles,vertex,rotation,glrotatef,collitions
 Moving things back and forth is all fine and dandy, but what we really want is full degrees of freedom (DOF). We want to be able to twist and turn, to look behind us and to change direction. And for this we need rotation.
 
 3D Rotation Basics
