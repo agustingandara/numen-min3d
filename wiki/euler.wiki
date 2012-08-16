@@ -1,4 +1,4 @@
-#labels Teorema,Rotacion,Euler
+#labels teorema,rotacion,euler,angulos,axis
 En geometría el Teorema de la rotación de Euler dice que, en un espacio tridimensional, cualquier movimiento de un sólido rígido que mantenga un punto constante, también debe dejar constante un eje completo. Esto también quiere decir que cualquier composición de rotaciones sobre un sólido rígido con ejes arbitrarios es equivalente a una sola rotación sobre un nuevo eje, llamado Polo de Euler. Al ser la combinación de rotaciones otra rotación, el conjunto de las operaciones de rotación tiene una estructura algebraica conocida como grupo. En concreto al grupo de rotaciones se le conoce como "grupo especial ortogonal de dimensión 3" o SO(3)
 El teorema toma su nombre de Leonhard Euler, que lo demostró en 1775 con un argumento geométrico. La extensión de este concepto a la cinemática da el concepto de Eje instantáneo de rotación.
 En términos de álgebra lineal, esto también quiere decir que el producto de dos matrices de rotación es también una matriz de rotación y que todas ellas tienen un único autovalor real que debe ser la unidad.
