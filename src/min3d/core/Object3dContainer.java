@@ -83,14 +83,14 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 	 * X/Y/Z position of object. 
 	 */
 	
-	public void positionPlus(float x, float y, float z){
+	/*public void positionPlus(float x, float y, float z){
 		
 		_position.x += x;
 		_position.y += y;
 		_position.z += z;
 		//Dinamic collitions - Plus funciton into object Container
 		for(int i = 0; i< this.numChildren();i++){
-			this.getChildAt(i).boundingBox.positionPlus(x, y, z);
+			//this.getChildAt(i).boundingBox.positionPlus(x, y, z);
 		}
 	}
 	
@@ -101,21 +101,21 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 		_position.z += plus.z;
 		//Dinamic collitions - Plus funciton into object Container
 		for(int i = 0; i< this.numChildren();i++){
-			this.getChildAt(i).boundingBox.positionPlus(plus.x, plus.y, plus.z);
+			//this.getChildAt(i).boundingBox.positionPlus(plus.x, plus.y, plus.z);
 		}
-	}
+	}*/
 	
 	/**
 	 * X/Y/Z euler rotation of object, using Euler angles.
 	 * Units should be in degrees, to match OpenGL usage. 
 	 */
-	public void rotationPlus(float x, float y, float z){
+	/*public void rotationPlus(float x, float y, float z){
 		_rotation.x += x;
 		_rotation.y += y;
 		_rotation.z += z;
 		//Dinamic collitions - Plus funciton into object Container
 		for(int i = 0; i< this.numChildren();i++){
-			this.getChildAt(i).boundingBox.rotationPlus(x, y, z);
+			//this.getChildAt(i).boundingBox.rotationPlus(x, y, z);
 		}
 	}
 	
@@ -125,21 +125,21 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 		_rotation.z += plus.z;
 		//Dinamic collitions - Plus funciton into object Container
 		for(int i = 0; i< this.numChildren();i++){
-			this.getChildAt(i).boundingBox.rotationPlus(plus.x, plus.y, plus.z);
+			//this.getChildAt(i).boundingBox.rotationPlus(plus.x, plus.y, plus.z);
 		}
-	}
+	}*/
 	
 	/**
 	 * X/Y/Z scale of object.
 	 */
 	
-	public void scalePlus(float x, float y, float z){
+	/*public void scalePlus(float x, float y, float z){
 		_scale.x += x;
 		_scale.y += y;
 		_scale.z += z;
 		//Dinamic collitions - Plus funciton into object Container
 		for(int i = 0; i< this.numChildren();i++){
-			this.getChildAt(i).boundingBox.scalePlus(x, y, z);
+			//this.getChildAt(i).boundingBox.scalePlus(x, y, z);
 		}
 	}
 	
@@ -149,9 +149,9 @@ public class Object3dContainer extends Object3d implements IObject3dContainer
 		_scale.z += plus.z;
 		//Dinamic collitions - Plus funciton into object Container
 		for(int i = 0; i< this.numChildren();i++){
-			this.getChildAt(i).boundingBox.scalePlus(plus.x, plus.y, plus.z);
+			//this.getChildAt(i).boundingBox.scalePlus(plus.x, plus.y, plus.z);
 		}
-	}
+	}*/
 	
 	/**
 	 * TODO: Use better lookup 

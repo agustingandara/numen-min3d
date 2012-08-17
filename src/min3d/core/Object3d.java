@@ -340,11 +340,11 @@ public class Object3d
 		return _position;
 	}
 	
-	public void positionPlus(Number3d plus){
+	/*public void positionPlus(Number3d plus){
 		_position.x += plus.x;
 		_position.y += plus.y;
 		_position.z += plus.z;
-		if(boundingBox != null) boundingBox.positionPlus(plus.x, plus.y, plus.z);
+		//if(boundingBox != null) boundingBox.positionPlus(plus.x, plus.y, plus.z);
 	}
 	
 	public void positionPlus(float x, float y, float z){
@@ -352,8 +352,8 @@ public class Object3d
 		_position.x += x;
 		_position.y += y;
 		_position.z += z;
-		if(boundingBox != null) boundingBox.positionPlus(x, y, z);
-	}
+		//if(boundingBox != null) boundingBox.positionPlus(x, y, z);
+	}*/
 	
 	/**
 	 * X/Y/Z euler rotation of object, using Euler angles.
@@ -363,19 +363,19 @@ public class Object3d
 		return _rotation;
 	}
 	
-	public void rotationPlus(Number3d plus){
+	/*public void rotationPlus(Number3d plus){
 		_rotation.x += plus.x;
 		_rotation.y += plus.y;
 		_rotation.z += plus.z;
-		if(boundingBox != null) boundingBox.rotationPlus(plus.x, plus.y, plus.z);
+		//if(boundingBox != null) boundingBox.rotationPlus(plus.x, plus.y, plus.z);
 	}
 	
 	public void rotationPlus(float x, float y, float z){
 		_rotation.x += x;
 		_rotation.y += y;
 		_rotation.z += z;
-		if(boundingBox != null) boundingBox.rotationPlus(x, y, z);
-	}
+		//if(boundingBox != null) boundingBox.rotationPlus(x, y, z);
+	}*/
 
 	/**
 	 * X/Y/Z scale of object.
@@ -384,19 +384,19 @@ public class Object3d
 		return _scale;
 	}
 	
-	public void scalePlus(Number3d plus){
+	/*public void scalePlus(Number3d plus){
 		_scale.x += plus.x;
 		_scale.y += plus.y;
 		_scale.z += plus.z;
-		if(boundingBox != null) boundingBox.scalePlus(plus.x, plus.y, plus.z);
+		//if(boundingBox != null) boundingBox.scalePlus(plus.x, plus.y, plus.z);
 	}
 	
 	public void scalePlus(float x, float y, float z){
 		_scale.x += x;
 		_scale.y += y;
 		_scale.z += z;
-		if(boundingBox != null) boundingBox.scalePlus(x, y, z);
-	}
+		//if(boundingBox != null) boundingBox.scalePlus(x, y, z);
+	}*/
 	
 	/**
 	 * Point size (applicable when renderType is POINT)
