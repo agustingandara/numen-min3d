@@ -57,13 +57,13 @@ public class CameraVoCollition extends CameraVo
 				//Log.d("VERTEX", "INTERNAL");
 				if(obj instanceof Object3dContainer){
 					for (Object3d subObj : ((Object3dContainer) obj).children){
-						if(subObj.boundingBox.existsCollition(subObj, positionNew, targetNew)){
+						if(subObj.boundingBox.existsCameraVoCollition(obj, positionNew, targetNew)){
 							colision = true;
 							break;
 						}
 					}
 				}else if(obj instanceof Object3d){
-					if(obj.boundingBox.existsCollition(obj, positionNew, targetNew)) {
+					if(obj.boundingBox.existsCameraVoCollition(obj, positionNew, targetNew)) {
 						colision = true;
 						break;
 					}
