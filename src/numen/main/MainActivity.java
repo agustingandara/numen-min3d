@@ -2,6 +2,8 @@ package numen.main;
 
 import javax.microedition.khronos.opengles.GL10;
 
+/**Agustin Gandara - Numen**/
+
 import numen.controllers.AnalogController;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -57,10 +59,12 @@ public class MainActivity extends RendererActivity  {
 
 		//Objects
 		this.object = parser.getParsedObject();
-		this.object.position().x += 1f;
-		this.object.position().y += -1.3f;
-		this.object.rotation().x += -90;
-		this.object.rotation().z += 45;
+		this.object.positionPlus(1f, -1.3f, 0);
+		//this.object.position().x += 1f;
+		//this.object.position().y += -1.3f;
+		this.object.rotationPlus(-90, 0, 45);
+		//this.object.rotation().x += -90;
+		//this.object.rotation().z += 45;
 		this.scene.addChild(object);
 	}
 	

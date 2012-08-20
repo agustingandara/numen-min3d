@@ -2,7 +2,9 @@ package numen.algorithms;
 
 import min3d.Utils;
 
-public class Algorithms {
+/**Agustin Gandara - Numen Library**/
+
+public class Geo3dAlgorithms {
 
 	//Scale Point Module
 	public static float scale(float moduleDimensionOne, float scale){
