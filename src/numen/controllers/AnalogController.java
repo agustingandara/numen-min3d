@@ -1,9 +1,11 @@
 package numen.controllers;
 
-import numen.algorithms.Algorithms;
+import numen.algorithms.Geo3dAlgorithms;
 import min3d.core.Scene;
 import min3d.vos.Number3d;
 import android.view.MotionEvent;
+
+/**Agustin Gandara - Numen Library**/
 
 public class AnalogController {
 
@@ -27,7 +29,7 @@ public class AnalogController {
 	private float dySecondary;
 	private boolean touchposition;
 	//Controllers constant
-	private final float degsens = 1.2f;
+	private final float degsens = 1.9f;
 	private final float movsens = 0.12f;
 	private final float spercent = 0.40f;
 	private final int degylimit = 25;
@@ -150,9 +152,9 @@ public class AnalogController {
 				this.degy -= (degsens/(area*spercent))*(this.dy-(area*(1-spercent)));
 			}
 			
-			plus.x = Algorithms.rotationXAngle(degx);//(float)Math.cos(degx*Utils.DEG);
-			plus.z = Algorithms.rotationZAngle(degx);//(float)Math.sin(degx*Utils.DEG);
-			plus.y = Algorithms.rotationYAngle(degy);//(float)Math.sin(degy*Utils.DEG);
+			plus.x = Geo3dAlgorithms.rotationXAngle(degx);//(float)Math.cos(degx*Utils.DEG);
+			plus.z = Geo3dAlgorithms.rotationZAngle(degx);//(float)Math.sin(degx*Utils.DEG);
+			plus.y = Geo3dAlgorithms.rotationYAngle(degy);//(float)Math.sin(degy*Utils.DEG);
 			//scene.camera().target.x = scene.camera().position.x + (float)Math.cos(degx*Utils.DEG);
 			//scene.camera().target.z = scene.camera().position.z + (float)Math.sin(degx*Utils.DEG);
 			//scene.camera().target.y = scene.camera().position.y + (float)Math.sin(degy*Utils.DEG);
@@ -187,21 +189,21 @@ public class AnalogController {
 			}
 			//Update position up/down
 			//trigonometry = variationy * (float)Math.cos(degx*Utils.DEG);
-			plus.x += Algorithms.positionXFowardBack(variationy, degx);//trigonometry;
+			plus.x += Geo3dAlgorithms.positionXFowardBack(variationy, degx);//trigonometry;
 			//scene.camera().position.x += trigonometry;
 			//scene.camera().target.x += trigonometry;
 			//trigonometry = variationy * (float)Math.sin(degx*Utils.DEG);
-			plus.z += Algorithms.positionZFowardBack(variationy, degx);//trigonometry;
+			plus.z += Geo3dAlgorithms.positionZFowardBack(variationy, degx);//trigonometry;
 			//scene.camera().position.z += trigonometry;
 			//scene.camera().target.z += trigonometry;
 			
 			//Update position left/rigth
 			//trigonometry = variationx * (float)Math.cos((degx*Utils.DEG)-90);
-			plus.x += Algorithms.positionXLeftRight(variationx, degx);//trigonometry;
+			plus.x += Geo3dAlgorithms.positionXLeftRight(variationx, degx);//trigonometry;
 			//scene.camera().position.x += trigonometry;
 			//scene.camera().target.x += trigonometry;
 			//trigonometry = variationx * (float)Math.sin((degx*Utils.DEG)-90);
-			plus.z += Algorithms.positionZLeftRight(variationx, degx);//trigonometry;
+			plus.z += Geo3dAlgorithms.positionZLeftRight(variationx, degx);//trigonometry;
 			//scene.camera().position.z += trigonometry;
 			//scene.camera().target.z += trigonometry;
 			

@@ -1,13 +1,16 @@
 package min3d.core;
 
-import android.util.Log;
-import numen.algorithms.Algorithms;
+import numen.algorithms.Geo3dAlgorithms;
 import numen.algorithms.Quaternions;
 import min3d.vos.Number3d;
+
+/**Agustin Gandara - Numen Library**/
 
 public class BoundingBox{
 
 	//8 vertex
+	protected Number3d[] vertex;
+	/**Vertex array ORDER**//*
 	protected Number3d mmm;
 	protected Number3d mmM;
 	protected Number3d mMm;
@@ -15,7 +18,7 @@ public class BoundingBox{
 	protected Number3d Mmm;
 	protected Number3d MmM;
 	protected Number3d MMm;
-	protected Number3d MMM;
+	protected Number3d MMM;*/
 	
 	private Number3d center;
 	private Number3d Max;
@@ -29,15 +32,32 @@ public class BoundingBox{
 		this.Max = new Number3d(number.x, number.y, number.z);//= center.clone();
 		this.MinUpdated = center.clone();
 		this.MaxUpdated = center.clone();
+		this.vertex = new Number3d[8];
+		this.createBox();
 	}
 	
-	public boolean existsCameraVoCollition(Object3d obj, Number3d positionNew, Number3d targetNew){		
-		
+	public BoundingBox() {
+		this.center = new Number3d(0, 0, 0);
+		this.Min = center.clone();
+		this.Max = center.clone();
+		this.MinUpdated = center.clone();
+		this.MaxUpdated = center.clone();
+		this.vertex = new Number3d[8];
+	}
+	
+	public void updateValues(Object3d obj){
 		float[] euler = {obj.rotation().x, obj.rotation().z, obj.rotation().y};
 		float[] quat = Quaternions.getQuatFromEuler(euler);
-		
-		this.createBox();
+		//this.createBox();
 		this.updateBox(obj.position(), quat, obj.scale());
+	}
+	
+	public boolean existsCameraVoCollition(Number3d positionNew, Number3d targetNew){		
+		
+		//float[] euler = {obj.rotation().x, obj.rotation().z, obj.rotation().y};
+		//float[] quat = Quaternions.getQuatFromEuler(euler);
+		//this.createBox();
+		//this.updateBox(obj.position(), quat, obj.scale());
 
 		/*Log.d("minx-nup", String.valueOf(Min.x));
 		Log.d("miny-nup", String.valueOf(Min.y));
@@ -77,6 +97,8 @@ public class BoundingBox{
 		else if(number.y > Max.y) Max.y = number.y;
 		if(number.z < Min.z) Min.z = number.z;
 		else if(number.z > Max.z) Max.z = number.z;
+
+		this.createBox();
 	}
 	
 	public void resetVertexToUpdate(Number3d number){
@@ -94,17 +116,29 @@ public class BoundingBox{
 	}
 	
 	public void createBox(){
-		this.mmm = new Number3d(Min.x, Min.y, Min.z);
+		
+		this.vertex[0] = new Number3d(Min.x, Min.y, Min.z);
+		this.vertex[1] = new Number3d(Min.x, Min.y, Max.z);
+		this.vertex[2] = new Number3d(Min.x, Max.y, Min.z);
+		this.vertex[3] = new Number3d(Min.x, Max.y, Max.z);
+		this.vertex[4] = new Number3d(Max.x, Min.y, Min.z);
+		this.vertex[5] = new Number3d(Max.x, Min.y, Max.z);
+		this.vertex[6] = new Number3d(Max.x, Max.y, Min.z);
+		this.vertex[7] = new Number3d(Max.x, Max.y, Max.z);
+		/*this.mmm = new Number3d(Min.x, Min.y, Min.z);
 		this.mmM = new Number3d(Min.x, Min.y, Max.z);
 		this.mMm = new Number3d(Min.x, Max.y, Min.z);
 		this.mMM = new Number3d(Min.x, Max.y, Max.z);
 		this.Mmm = new Number3d(Max.x, Min.y, Min.z);
 		this.MmM = new Number3d(Max.x, Min.y, Max.z);
 		this.MMm = new Number3d(Max.x, Max.y, Min.z);
-		this.MMM = new Number3d(Max.x, Max.y, Max.z);
+		this.MMM = new Number3d(Max.x, Max.y, Max.z);*/
 	}
 	
 	public void updateBox(Number3d position, float[] rotation, Number3d scale){
+		for(int i = 0 ; i< this.vertex.length ; i++)
+			this.updatePoint(i, position, rotation, scale);
+		/*
 		this.mmm = this.updatePoint(this.mmm, position, rotation, scale);
 		this.resetVertexToUpdate(this.mmm);
 		this.mmM = this.updatePoint(this.mmM, position, rotation, scale);
@@ -121,26 +155,25 @@ public class BoundingBox{
 		this.addVertexToUpdate(this.MMm);
 		this.MMM = this.updatePoint(this.MMM, position, rotation, scale);
 		this.addVertexToUpdate(this.MMM);
+		*/
 	}
 	
-	public Number3d updatePoint(Number3d point, Number3d position, float[] rotation, Number3d scale){
+	public void updatePoint(int i, Number3d position, float[] rotation, Number3d scale){
+		
 		//Rotation
-		/*Log.d("minx", String.valueOf(point.x));
-		Log.d("miny", String.valueOf(point.y));
-		Log.d("minz", String.valueOf(point.z));*/
-		Number3d newPoint = Quaternions.rotatePoint(point, rotation);
-		/*Log.d("minx-up", String.valueOf(point.x));
-		Log.d("miny-up", String.valueOf(point.y));
-		Log.d("minz-up", String.valueOf(point.z));*/
+		Number3d newPoint = Quaternions.rotatePoint(this.vertex[i], rotation);
 		//Scale
-		newPoint.x = Algorithms.scale(newPoint.x, scale.x);
-		newPoint.y = Algorithms.scale(newPoint.y, scale.y);
-		newPoint.z = Algorithms.scale(newPoint.z, scale.z);
+		newPoint.x = Geo3dAlgorithms.scale(newPoint.x, scale.x);
+		newPoint.y = Geo3dAlgorithms.scale(newPoint.y, scale.y);
+		newPoint.z = Geo3dAlgorithms.scale(newPoint.z, scale.z);
 		//Position
 		newPoint.x += position.x;
 		newPoint.y += position.y;
 		newPoint.z += position.z;
+		//SaveVertex
+		//this.vertex[i] = newPoint;
 		
-		return newPoint;
+		if(i == 0)	this.resetVertexToUpdate(newPoint);
+		else this.addVertexToUpdate(newPoint);
 	}
 }
